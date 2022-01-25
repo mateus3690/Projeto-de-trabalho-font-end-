@@ -14,7 +14,7 @@ function footer() {
                     <div className='row'>
 
                         <div className='col-lg-4 col-md-6 footer-contact'>
-                            <h4 className='mt-0'>PH.</h4>
+                            <h4 className='mt-0'>CP.</h4>
                             <p>
                                 Casdatro de Ponto de Trabalho
                                 Brazil, Maceió<br></br>
@@ -50,7 +50,7 @@ function footer() {
             <hr></hr>
             <div class="container py-1 text-center">
 				<div>
-					&copy; Copyright <strong><span>Faculdade Inovação Tecnológica</span></strong>. Todos os direitos reservados.
+					&copy; Copyright <strong><span>CP - Cadastro de Ponto</span></strong>. Todos os direitos reservados.
                     <p>Developed by <a id='no_line' href="#">Mateus Santos</a></p>
                 </div>
             </div>
