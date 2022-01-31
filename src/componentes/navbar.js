@@ -3,15 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import fnc_img from '../componentes/imgs'
 import img_logo from '../static/img/logo.png'
 import img_user from '../static/img/user.png'
+import Login from '../pages/cadastroUser'
+import {Link} from "react-router-dom";
 
 var Menu = () => (
+  
   <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
 
     <Container>
 
       <Navbar.Brand href="#home">
 
-        {fnc_img(img_logo, 50, 50, 'Cadastro de Ponto')}
+      <Link style={{"text-decoration": 'none'}} to="/">{fnc_img(img_logo, 50, 50, 'Cadastro de Ponto')}</Link>
 
       </Navbar.Brand>
 
@@ -27,11 +30,31 @@ var Menu = () => (
               <Nav>
               
                 <NavDropdown title="autenticação" className='text-center'>
+
                   {fnc_img(img_user, 40, 40)}
-                  <NavDropdown.Item href="#ac1">Login</NavDropdown.Item>
-                  <NavDropdown.Item href="#ac2">Cadastra-se</NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <Link style={{"text-decoration": 'none', "color":"black"}}
+                          to="/login">
+                          Login
+                    </Link>
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Item>
+                    <Link style={{"text-decoration": 'none', "color":"black"}}
+                          to="/cadastro-se">
+                          Cadastra-se
+                    </Link>
+                  </NavDropdown.Item>
+                  
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#ac3">Sair </NavDropdown.Item>
+                  
+                  <NavDropdown.Item>
+                    <Link style={{"text-decoration": 'none', "color":"black"}}
+                          to="/sair">
+                          Sair
+                    </Link>
+                  </NavDropdown.Item>
+
                 </NavDropdown>
       
               </Nav>

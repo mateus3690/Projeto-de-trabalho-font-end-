@@ -1,9 +1,31 @@
+import React from "react";
 
+export default class Table extends React.Component{
 
-function table (){
+    state={
+        pontos:[]
+    }
 
-    return (
-        
+    responseGet = () => {
+      const url = "http://127.0.0.1:5000/v1/pontos/"
+      const config = {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+      fetch(url, config)
+          .then(response => response.json())
+          .then(data => this.setState({pontos:data}))
+    }
+
+    componentDidMount() {
+      this.responseGet()
+    }
+
+    getTable = () =>{
+      return (       
         <div className="mt-5 w-100 text-center">
             
             <h1>PONTO CADASTRADOS:</h1>
@@ -20,23 +42,24 @@ function table (){
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <th scope="row">Sábado</th>
-                <td>01/01/2022 08:00:00h</td>
-                <td>01/01/2022 12:00:00h</td>
-                <td>01/01/2022 13:00:00h</td>
-                <td>01/01/2022 18:00:00h</td>
-                <td>0 min</td>
-                </tr>
-                
+                {this.state.pontos && this.state.pontos.map(ponto => {
+                  return(<tr key={ponto.id}>
+                          <th scope="row">{ponto.dia_semana}</th>
+                          <td>{ponto.primeiro_ponto}</td>
+                          <td>{ponto.segundo_ponto}</td>
+                          <td>{ponto.terceiro_ponto}</td>
+                          <td>{ponto.quarto_ponto}</td>
+                          <td>{ponto.saldo_dia}</td>
+                         </tr>)
+                })}
             </tbody>
             </table>
             <hr></hr>
         </div>
-        
-
     )
+    }
 
+    render(){
+      return this.getTable()    
+    } 
 }
-
-export default table;

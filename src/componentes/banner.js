@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../static/css/style.css'
+//import { BrowserRouter as Router ,Routes, Route , Switch, Link} from "react-router-dom";
 
 var fnc_banner = () => {
     return(
