@@ -1,4 +1,15 @@
 
+body{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(201, 157, 157, 0.548);
+  background-size: cover;
+  position: relative;
+  
+}
+
+strong{color: white}
+
 #no_line{
  text-decoration: none;
  color: white;

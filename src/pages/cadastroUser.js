@@ -2,16 +2,18 @@ import {Component} from 'react';
 import {toast} from 'react-toastify/';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link} from "react-router-dom";
+
 toast.configure()
 
-export default class Login extends Component{
-
+export default class cadastroUser extends Component{
+ 
   state={
       nome:"",
       nascimento:"",
       cpf:"",
       email:"",
-      senha:""
+      senha:"",
+      return:""
   }
   
   digitarCampoNome = (evento) =>{
@@ -37,8 +39,18 @@ export default class Login extends Component{
   loginPost = () =>{
 
     
-    const notify = () =>{
-      toast('teste')
+    const notify = (tipo, msg) =>{
+      // eslint-disable-next-line default-case
+      switch (tipo) {
+        case 'sucesso':
+          toast.success(`Cadastro realizado com sucesso!, seja bem vindo ${msg}!`,
+                        {autoClose:10000});
+          break
+        case 'erro':
+          toast.error(`Ops! ocorreu um erro, ${msg}, por favor vá até o menu e tente novamente!`,{autoClose: 10000});
+          break
+      }
+   
     } 
     const dados = {
           "nome":this.state.nome,
@@ -60,14 +72,31 @@ export default class Login extends Component{
     const url = "http://127.0.0.1:5000/v1/login/"
 
     fetch(url, setPost)
-        .then(res => res.json())
-        .then(data => {notify()/*
-                        console.log(data)
-                        if (data.mensagem){
-                          alert(data.mensagem)
-                        }*/
-                      })
-        .catch(erro => console.log(erro))
+        .then(res => (res.json())
+        .then(data => {
+              //console.log(data)
+              var bool = false
+              if (data.id){
+                //this.setState({return:'/'})
+                bool = true
+              }
+
+              switch (bool) {
+                case true:
+                  notify('sucesso', data.nome)
+                  break
+                default:
+                  notify('erro', data.mensagem)
+                  break
+              }
+
+            }
+          )
+        ).catch(erro => console.log(erro))
+  }
+
+  componentDidMount(){
+    return this.state.return
   }
 
   loginForm = () =>{
@@ -129,12 +158,12 @@ export default class Login extends Component{
 
           <div className="form-group mt-3 row text-center">
             <div className='col-6'>
-              <Link onClick={() => this.loginPost()} style={{"text-decoration": 'none'}} to="/" className='btn-lg btn-danger mr-5'>
+              <Link onClick={() => {this.loginPost()}}  style={{"text-decoration": 'none'}} to={this.state.return === '' && '/'} className='btn-lg btn-danger mr-5'>
                 Cadastrar
               </Link>
             </div>
             <div className='col-6'>
-              <Link style={{"text-decoration": 'none'}} to="/" className='btn-lg btn-secondary mr-5'>
+              <Link style={{"text-decoration": 'none'}} to='/' className='btn-lg btn-secondary mr-5'>
                 Cancelar
               </Link>
             </div>

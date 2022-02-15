@@ -3,68 +3,107 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import fnc_img from '../componentes/imgs'
 import img_logo from '../static/img/logo.png'
 import img_user from '../static/img/user.png'
-import Login from '../pages/cadastroUser'
+import sair from '../utils/sair'
+import road from '../utils/carregarPage'
 import {Link} from "react-router-dom";
 
-var Menu = () => (
-  
-  <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
 
-    <Container>
+var Menu = (props) => {
 
-      <Navbar.Brand href="#home">
+  return(
+    <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
 
-      <Link style={{"text-decoration": 'none'}} to="/">{fnc_img(img_logo, 50, 50, 'Cadastro de Ponto')}</Link>
+      <Container>
 
-      </Navbar.Brand>
+        <Navbar.Brand href="#home">
 
-      <Row className=''>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse>
+        <Link style={{"text-decoration": 'none'}} to="/">{fnc_img(img_logo, 50, 50, 'Cadastro de Ponto')}</Link>
 
-            <Nav >
+        </Navbar.Brand>
 
-              <Nav.Link href="#p">Pontuar dia </Nav.Link>
-              <Nav.Link href="#f"> Fechar Mês </Nav.Link>
+        <Row className=''>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse>
 
-              <Nav>
-              
-                <NavDropdown title="autenticação" className='text-center'>
+              <Nav >
+              <Nav.Link>
+                  <Link style={{"text-decoration": 'none', "color":"lime"}}
+                        to={'/'}>
+                        <p className='h6 '><strong>Usuario: </strong>{props.nome ? props.nome : "Visitante"}</p>
+                  </Link> 
+                </Nav.Link>
+                
+                <Nav.Link>
+                  { props.nome &&
 
-                  {fnc_img(img_user, 40, 40)}
-                  <NavDropdown.Item>
-                    <Link style={{"text-decoration": 'none', "color":"black"}}
-                          to="/login">
-                          Login
-                    </Link>
-                  </NavDropdown.Item>
+                    <Link style={{"text-decoration": 'none', "color":"white"}}
+                          to={'/cadastroPonto'}>
+                          Pontuar dia
+                    </Link> 
 
-                  <NavDropdown.Item>
-                    <Link style={{"text-decoration": 'none', "color":"black"}}
-                          to="/cadastro-se">
-                          Cadastra-se
-                    </Link>
-                  </NavDropdown.Item>
-                  
-                  <NavDropdown.Divider />
-                  
-                  <NavDropdown.Item>
-                    <Link style={{"text-decoration": 'none', "color":"black"}}
-                          to="/sair">
-                          Sair
-                    </Link>
-                  </NavDropdown.Item>
+                  }
+                </Nav.Link>
 
-                </NavDropdown>
-      
-              </Nav>
+                <Nav.Link>
+                  { props.nome &&
 
-          </Nav>
-        </Navbar.Collapse>
-      </Row>
-    </Container>
-  </Navbar>
+                    <Link style={{"text-decoration": 'none', "color":"white"}}
+                          to={'/'}>
+                          Fechar Mês
+                    </Link> 
 
-)
+                  }
+                </Nav.Link>
+
+                <Nav>
+                
+                  <NavDropdown title="Autenticação" className='text-center'>
+
+                    {fnc_img(img_user, 40, 40)}
+                    <NavDropdown.Item>
+                      { props.nome === null &&
+                        <Link style={{"text-decoration": 'none', "color":"black"}}
+                              to="/login">
+                              Login
+                        </Link> 
+                      }
+                    </NavDropdown.Item>
+
+                      <NavDropdown.Item>
+                       { props.nome === null &&
+                          <Link style={{"text-decoration": 'none', "color":"black"}}
+                                to="/cadastra-se">
+                                Cadastra-se
+                          </Link>
+                        }
+                      </NavDropdown.Item>
+                    
+                    
+                    <NavDropdown.Divider />
+                    
+                    <NavDropdown.Item>
+                      { props.nome &&
+                        <Link style={{"text-decoration": 'none', "color":"black"}}
+                              to="/">
+                              <p onClick={() =>{
+                                sair(true)
+                                road(true)
+                              }}>Sair</p>
+                        </Link>
+                      }
+                    </NavDropdown.Item>
+
+                  </NavDropdown>
+        
+                </Nav>
+
+            </Nav>
+          </Navbar.Collapse>
+        </Row>
+      </Container>
+    </Navbar>
+  )
+
+}
 
 export default Menu;
