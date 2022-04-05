@@ -13,6 +13,7 @@ export default class cadastroUser extends Component{
       cpf:"",
       email:"",
       senha:"",
+      salario:0,
       return:""
   }
   
@@ -36,6 +37,10 @@ export default class cadastroUser extends Component{
     this.setState({senha:evento.target.value})
   }
 
+  digitarSalario = (evento) =>{
+    this.setState({salario:evento.target.value})
+  }
+
   loginPost = () =>{
 
     
@@ -57,7 +62,8 @@ export default class cadastroUser extends Component{
           "nascimento":this.state.nascimento,
           "cpf":this.state.cpf,
           "email":this.state.email,
-          "senha":this.state.senha
+          "senha":this.state.senha,
+          "salario":this.state.salario
     }
 
     const setPost = {
@@ -74,10 +80,9 @@ export default class cadastroUser extends Component{
     fetch(url, setPost)
         .then(res => (res.json())
         .then(data => {
-              //console.log(data)
+              
               var bool = false
-              if (data.id){
-                //this.setState({return:'/'})
+              if (data.cpf){
                 bool = true
               }
 
@@ -132,6 +137,16 @@ export default class cadastroUser extends Component{
                     onChange={this.digitarCampoCpf} 
                     id="cpf" 
                     type="text" 
+                    className="form-control" 
+                    placeholder="Seu CPF"/>
+          </div>
+
+          <div className="form-group mt-3">
+            <label for="salario">Salário</label>
+            <input  value={this.state.salario} 
+                    onChange={this.digitarSalario} 
+                    id="salario" 
+                    type="number" 
                     className="form-control" 
                     placeholder="Seu CPF"/>
           </div>

@@ -7,15 +7,16 @@ import sair from '../utils/sair'
 import road from '../utils/carregarPage'
 import {Link} from "react-router-dom";
 
-
 var Menu = (props) => {
-
+  var nome = props.nome
+  //var usuario = nome.split(' ') ? nome : ''
+  //nome = `${usuario[0]} ${usuario[1]}`
   return(
     <Navbar collapseOnSelect expand="lg" bg="danger" variant="dark">
 
       <Container>
 
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
 
         <Link style={{"text-decoration": 'none'}} to="/">{fnc_img(img_logo, 50, 50, 'Cadastro de Ponto')}</Link>
 
@@ -29,12 +30,12 @@ var Menu = (props) => {
               <Nav.Link>
                   <Link style={{"text-decoration": 'none', "color":"lime"}}
                         to={'/'}>
-                        <p className='h6 '><strong>Usuario: </strong>{props.nome ? props.nome : "Visitante"}</p>
+                        <p className='h6 '><strong>Usuario: </strong>{nome ? nome : "Visitante"}</p>
                   </Link> 
                 </Nav.Link>
                 
                 <Nav.Link>
-                  { props.nome &&
+                  { nome &&
 
                     <Link style={{"text-decoration": 'none', "color":"white"}}
                           to={'/cadastroPonto'}>
@@ -45,10 +46,10 @@ var Menu = (props) => {
                 </Nav.Link>
 
                 <Nav.Link>
-                  { props.nome &&
+                  { nome &&
 
                     <Link style={{"text-decoration": 'none', "color":"white"}}
-                          to={'/'}>
+                          to={'/fecharMes'}>
                           Fechar Mês
                     </Link> 
 
@@ -61,19 +62,23 @@ var Menu = (props) => {
 
                     {fnc_img(img_user, 40, 40)}
                     <NavDropdown.Item>
-                      { props.nome === null &&
+                      { nome === null &&
                         <Link style={{"text-decoration": 'none', "color":"black"}}
                               to="/login">
-                              Login
+                              <div>
+                                Login
+                              </div>
                         </Link> 
                       }
                     </NavDropdown.Item>
 
                       <NavDropdown.Item>
-                       { props.nome === null &&
+                       { nome === null &&
                           <Link style={{"text-decoration": 'none', "color":"black"}}
                                 to="/cadastra-se">
-                                Cadastra-se
+                                <div> 
+                                  Cadastra-se
+                                </div>   
                           </Link>
                         }
                       </NavDropdown.Item>
@@ -82,9 +87,10 @@ var Menu = (props) => {
                     <NavDropdown.Divider />
                     
                     <NavDropdown.Item>
-                      { props.nome &&
+                      { nome &&
                         <Link style={{"text-decoration": 'none', "color":"black"}}
                               to="/">
+
                               <p onClick={() =>{
                                 sair(true)
                                 road(true)

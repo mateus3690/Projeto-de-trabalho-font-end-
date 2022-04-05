@@ -2,10 +2,9 @@ import React from "react";
 import fnc_img from '../componentes/imgs'
 import edit from '../static/img/lapis.png'
 import {Link} from "react-router-dom";
-//import deleteR from '../utils/restDelete'
-//import load from '../utils/carregarPage'
-export default class Table extends React.Component{
 
+export default class Table extends React.Component{
+    
     state={
         pontos:[]
     }
@@ -22,9 +21,8 @@ export default class Table extends React.Component{
       }
       fetch(url, config)
           .then(response => response.json())
-          .then(data => {
-                        
-                          this.setState({pontos:data})  
+          .then(data => {             
+                  this.setState({pontos:data})  
               }
           )
     }

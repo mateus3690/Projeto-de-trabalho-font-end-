@@ -9,7 +9,10 @@ import UserCadastro from './pages/cadastroUser'
 import Login from './pages/login'
 import BaterPonto from './pages/cadastroPonto'
 import EditarPonto from './pages/editarPonto'
+import FecharMes from './pages/fecharMes'
+import FormFechamento from './pages/formFechamento'
 import React from 'react';
+
 
 export default class App extends React.Component { 
 
@@ -32,7 +35,7 @@ export default class App extends React.Component {
   }
 
   render(){
-    console.log(this.state.cpf)
+    //console.log(this.state.cpf)
     return (
         <Router>
           <div className='container'>
@@ -45,9 +48,12 @@ export default class App extends React.Component {
                 <Route path="/" element={<><Banner true={this.state.cpf} /><Table chave={this.state.cpf}/></>}></Route> :
                 <Route path="/" element={<Banner />}></Route>
               }
+              //pages
               <Route path="/cadastroPonto" element={<BaterPonto chave={this.state.cpf}/>}></Route>
-              <Route path="/editarponto" element={<EditarPonto chave={this.state.cpf} />}></Route>
-              
+              <Route path="/editarponto" element={<EditarPonto chave={this.state.cpf}/>}></Route>
+              <Route path="/fecharMes" element={<FecharMes/>}></Route>
+              <Route path="/formFechamento" element={<FormFechamento chave={this.state.cpf}/>}></Route>
+
               //rotas da opção autenticação
               <Route path="/login" element={<Login login={this.autenticar} />}></Route>
               <Route path="/cadastra-se" element={<UserCadastro/>}></Route>
